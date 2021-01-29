@@ -11,7 +11,6 @@
         <Button x:Name="btn_ascolto" Content="Metti in ascolto..." HorizontalAlignment="Left" Margin="55,192,0,0" VerticalAlignment="Top" Width="142" Height="44" IsCancel="True" Foreground="#FF212121" BorderBrush="{x:Null}" Background="#FFDED2D2" FontSize="15" Click="btn_ascolto_Click"/>
         <Label x:Name="label" Content="Welcome " HorizontalAlignment="Left" Margin="73,93,0,0" VerticalAlignment="Top" Height="46" Width="112" Foreground="#FFDE2B2B" FontFamily="Courgette" FontSize="23"/>
         <Button x:Name="btn_Disconetti" Content="Disconetti" HorizontalAlignment="Left" Margin="54,270,0,0" VerticalAlignment="Top" Width="142" Height="44" IsCancel="True" Foreground="#FF212121" BorderBrush="{x:Null}" Background="#FFB6B6B6" FontSize="15" Click="btn_Disconetti_Click" IsEnabled="False"/>
-        <fa:ImageAwesome x:Name="Icon_refersh" Icon="Refresh" Spin="false" Foreground="White" Margin="102,338,119,41" />
 
         
     </Grid>

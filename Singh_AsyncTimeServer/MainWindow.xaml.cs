@@ -25,7 +25,7 @@ namespace Singh_AsyncTimeServer
         {
             InitializeComponent();
             mServer = new AsyncSocketServer();
-            Icon_refersh.Visibility = Visibility.Hidden;
+        //    Icon_refersh.Visibility = Visibility.Hidden;
         }
 
         private void btn_ascolto_Click(object sender, RoutedEventArgs e)
@@ -34,8 +34,8 @@ namespace Singh_AsyncTimeServer
             btn_ascolto.IsEnabled = false;
             btn_Disconetti.IsEnabled = true;
 
-            Icon_refersh.Spin = true;
-            Icon_refersh.Visibility = Visibility.Visible;
+            ////Icon_refersh.Spin = true;
+            //Icon_refersh.Visibility = Visibility.Visible;
 
         }
 

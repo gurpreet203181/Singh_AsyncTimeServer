@@ -41,9 +41,9 @@ namespace Singh_SocketAsyncLib
 
             Debug.WriteLine("Server in ascolto su IP: {0} - Porta: {1}"
                                  , mIP.ToString(), mPort.ToString());
-
             mServer.Start();
             timerMsg();
+
             Debug.WriteLine("Server avviato.");
             while (true)
             {
@@ -60,21 +60,18 @@ namespace Singh_SocketAsyncLib
         }
        
         //metodo per inviare metodo Inviatutti ogni 10sec
-        public async void timerMsg()
+        public  void timerMsg()
         {
             
-            await Task.Run(() =>
-            {
-                for (int i = 0; i < int.MaxValue; i++)
-                {
+            
                     System.Timers.Timer timer = new System.Timers.Timer();
                     timer.Interval = 10000;
                     timer.Elapsed += timer_Elapsed;
 
                     timer.Start();
 
-                }
-            });
+                
+            
         }
         public void timer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
@@ -89,6 +86,7 @@ namespace Singh_SocketAsyncLib
                 stream = client.GetStream();
                 reader = new StreamReader(stream);
                 char[] buff = new char[512];
+                byte[] buffsend = null;
                 int nBytes = 0;
                 while (true)
                 {
@@ -101,7 +99,29 @@ namespace Singh_SocketAsyncLib
                         Debug.WriteLine("Client Disconnesso");
                         break;
                     }
-                    string recvText = new string(buff);
+                    string recvText = new string(buff,0,nBytes);
+
+
+                    switch (recvText.Trim().ToLower())
+                    {
+                        case "date":
+
+                            buffsend = Encoding.ASCII.GetBytes("data");
+                             client.GetStream().WriteAsync(buffsend, 0, buffsend.Length);
+
+                            break;
+                           
+                        case "time":
+
+                           buffsend = Encoding.ASCII.GetBytes("ora");
+                             client.GetStream().WriteAsync(buffsend, 0, buffsend.Length);
+                            break;
+
+                        default:
+                            buffsend = Encoding.ASCII.GetBytes("Non ho capito");
+                            client.GetStream().WriteAsync(buffsend, 0, buffsend.Length);
+                            break;
+                    }
                     Debug.WriteLine("N° byte: {0}. Messaggio: {1}", nBytes, recvText);
                 }
 
@@ -130,7 +150,7 @@ namespace Singh_SocketAsyncLib
             {
                 foreach (TcpClient client in mClients)
                 {
-                    byte[] buff = Encoding.ASCII.GetBytes($"\n{dateTime}");
+                    byte[] buff = Encoding.ASCII.GetBytes($"{dateTime}");
                     client.GetStream().WriteAsync(buff, 0, buff.Length);
 
                 }
